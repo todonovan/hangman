@@ -28,7 +28,13 @@ class Game
   def load_game
     directory = Dir.open("/home/terry/Desktop/odin/fileio")
     files = directory.entries
+    
+    # TO DO: replace these with a process for storing saved games w/in a 
+    # specific, named directory
+    #####################
+    files.delete("hangman.rb")
     files.delete("5desk.txt")
+    #####################
     puts "The available games are: #{files.join(", ")}"
     puts "Please type the name of a file to open: "
     game_to_load = gets.chomp.to_s until files.include? game_to_load
@@ -133,6 +139,6 @@ class Game
   end
 end
 
-game = Game.new
+Game.new
 
 
