@@ -26,19 +26,12 @@ class Game
   end
 
   def load_game
-    directory = Dir.open("/home/terry/Desktop/odin/fileio")
+    directory = Dir.open("/home/terry/Desktop/odin/fileio/saved_games")
     files = directory.entries
-    
-    # TO DO: replace these with a process for storing saved games w/in a 
-    # specific, named directory
-    #####################
-    files.delete("hangman.rb")
-    files.delete("5desk.txt")
-    #####################
     puts "The available games are: #{files.join(", ")}"
     puts "Please type the name of a file to open: "
     game_to_load = gets.chomp.to_s until files.include? game_to_load
-    game_file = File.open(game_to_load)
+    game_file = File.open("saved_games/#{game_to_load}")
     yaml = game_file.read
     params = YAML::load(yaml)
     game_file.close
@@ -50,7 +43,7 @@ class Game
     puts "Type a name for the saved game: "
     file_name = gets.chomp.to_s
     yaml = YAML::dump(game)
-    game_file = File.open("#{file_name}", "w")
+    game_file = File.open("saved_games/#{file_name}", "w")
     game_file << yaml
     game_file.close
   end
